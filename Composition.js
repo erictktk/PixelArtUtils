@@ -182,10 +182,12 @@ import * as PixelUtils from "./PixelUtils.js";
     var newColor = [];
     var otherCoeff = 0;
 
+    /*
     console.log('startI = ' + startI);
     console.log('startJ = ' + startJ);
     console.log('height = ' + height);
     console.log('length = ' + length);
+    */
     for(let i = startI; i < startI+length; i += 1 ){
       for(let j = startJ; j < startJ+height; j += 1){
         pixel1 = getColorValue(i, j, width1, theArray);

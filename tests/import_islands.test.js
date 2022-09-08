@@ -23,7 +23,6 @@ test("test number of islands", ()=>{
             expect(pArrays.length).toBe(3);
 
             expect(GetDuplicateIslands(pArrays).length).toBe(3);
-        }
-        );
+        });
     }
 )

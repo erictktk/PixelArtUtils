@@ -1,5 +1,5 @@
 //import defaultJSONObject from "./initial_title.json" assert { type: "json"};
-import defaultJSONObject from "./initial_title.json";
+import defaultJSONObject from "./initial_title.json" assert { type: "json"};
 import { PixelArray } from "../PixelArray.js";
 
 

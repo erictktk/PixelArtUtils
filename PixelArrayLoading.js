@@ -105,6 +105,7 @@ export async function AsyncUrlsToImages(urls){
  */
  export async function AsyncUrlsToPixelArrays(urls){
   const results = await Promise.allSettled( urls.map( url => {
+    console.log(url);
     return loadImage(url).then(value => ImgToPixelArray(value));
   }));
 
