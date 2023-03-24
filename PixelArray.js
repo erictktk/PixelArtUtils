@@ -176,6 +176,16 @@ class PixelArray {
     return null;
   }
 
+  /** Draws PixelArray to specified canvas element
+   * 
+   * @param {HTMLCanvasElement} canvas 
+   */
+  toCanvas(canvas){
+    /**@type{HTMLCanvasElement} */
+    const context = canvas.getContext("2d");
+    const imgData = new ImageData(this.arr, this.width);
+    context.putImageData(imgData, 0, 0);
+  }
 }
 
 export { PixelArray };

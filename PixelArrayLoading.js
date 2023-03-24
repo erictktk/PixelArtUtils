@@ -1,6 +1,6 @@
 import { PixelArray } from "./PixelArray.js";
 
-/** Base function for loading an image from a url, returns a promise
+/** Base function for loading an image from a url, returns a promise.
  * 
  * @param {String} url 
  * @returns {Promise}
@@ -12,20 +12,18 @@ export function loadImage(url){
     image.onload = () => resolve(image);
     image.onerror = () => reject(new Error("Couldn't load image!"));
     image.src = url;
-    //console.log(image.src);
-    //console.log(image);
 
   });
 }
 
-/** Async code for loading an image from a url
+/** Async code for loading an image from a url.
  * 
  * @param {String} url 
  * @param {Function} callback 
- * @param {*} element 
+ * @param {HTMLElement} element 
  * @returns {PixelArray}
  */
-export async function AsyncUrlToPixelArray(url, callback, element=null){
+export async function AsyncUrlToPixelArray(url){
   try{
     let image = await loadImage(url);
     console.log(image.width);
@@ -36,17 +34,28 @@ export async function AsyncUrlToPixelArray(url, callback, element=null){
   }
 }
 
-/**Async function for loading an image from a url
+/** Async function for loading an image from a URL. Returns a PixelArray by default.  If a callback is specified,
+ * the function can return either the result from the callback or the PixelArray.
  * 
  * @param {String} url 
- * @param {Function} callback 
+ * @param {Function} callback
+ * @param {Boolean} returnFromCallback
  */
-export async function AsyncUrlToPixelArrayCallback(url, callback){
+export async function AsyncUrlToPixelArrayCallback(url, callback=null, returnFromCallback=false){
   try{
     let image = await loadImage(url);
     const pixelArray = ImgToPixelArray(image);
     if (callback){
-      callback(pixelArray);
+      const result = callback(pixelArray);
+      if (returnFromCallback){
+        return result;
+      }
+      else{
+        return pixelArray;
+      }
+    }
+    else{
+      return pixelArray;
     }
   }
   catch(err){
@@ -54,11 +63,11 @@ export async function AsyncUrlToPixelArrayCallback(url, callback){
   }
 }
   
-/** Takes an HTMLImageElement then converts it to pixelArray 
+/** Takes an HTMLImageElement then converts it to a PixelArray. 
  * 
  * @param {HTMLImageElement} img 
  * @param {ImageData} imageData 
- * @param {*} elementName 
+ * @param {String} elementName 
  * @returns {PixelArray}
  */ 
 export function ImgToPixelArray(img, imageData=null, elementName=null){
@@ -75,7 +84,7 @@ export function ImgToPixelArray(img, imageData=null, elementName=null){
       context.drawImage(img, 0, 0 );
       const imgData = context.getImageData(0, 0, img.width, img.height);
       const pixelArray = new PixelArray(imgData.data, img.width);
-      //canvas.remove();
+      canvas.remove();
       return pixelArray;
   }
   catch (err){
@@ -100,7 +109,7 @@ export async function AsyncUrlsToImages(urls){
 
 /** Returns a promise that you can .then and do a callback
  * 
- * @param {*} urls 
+ * @param {Array<String>} urls 
  * @returns 
  */
  export async function AsyncUrlsToPixelArrays(urls){
@@ -113,7 +122,6 @@ export async function AsyncUrlsToImages(urls){
 }
 
 
-  
 /**
  * 
  * @param {Array<string>} urls 
@@ -150,6 +158,28 @@ export async function AsyncUrlsToPixelArrayCallback(urls, finalCallbackTemplate)
     catch(err){
         console.log(err);
     }
+}
+
+
+/** Creates a canvas and puts a PixelArray there.
+ * 
+ * @param {PixelArray} pixelArray 
+ * @param {Int} zoom 
+ * @returns {HTMLCanvasElement}
+ */
+export function PixelArrayToCanvas(pixelArray, zoom=1){
+  /** @type {HTMLCanvasElement} */
+  const canvas = document.createElement('canvas');
+  const context = canvas.getContext('2d');
+  
+  const imgData = new ImageData(pixelArray.arr, pixelArray.width);
+
+  //console.log(img.width);
+  canvas.width = pixelArray.width*zoom;
+  canvas.height = pixelArray.height*zoom;
+  context.putImageData(imgData, 0, 0);
+
+  return canvas;
 }
 
 

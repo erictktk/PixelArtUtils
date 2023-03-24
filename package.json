@@ -1,0 +1,30 @@
+{
+  "name": "eric-pixelarrayutils",
+  "version": "0.8.0",
+  "description": "utils for images",
+  "main": "null",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "null"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/erictktk/PixelArtUtils.git"
+  },
+  "keywords": [
+    "pixel",
+    "pixel-art",
+    "canvas",
+    "color",
+    "grading",
+    "color-grading"
+  ],
+  "author": "MEEEEEEEEEEE",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/erictktk/PixelArtUtils/issues"
+  },
+  "homepage": "https://github.com/erictktk/PixelArtUtils#readme"
+}

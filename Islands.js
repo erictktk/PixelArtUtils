@@ -189,7 +189,7 @@ export function PixelArrayToPArrayIslands(pixelArray, anyColor=false, testAlpha=
  * @param {*} anyColor 
  * @param {*} testAlpha 
  * @param {*} minAlpha 
- * @param {*} noWhite 
+ * @param {Boolean} noWhite 
  * @returns 
  */
 export function FloodFillSelect(pixelArray, x, y, visitedArray=null, anyColor=false, testAlpha=false, minAlpha=1, noWhite=false){
