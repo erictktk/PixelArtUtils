@@ -1,6 +1,7 @@
 import { PixelArray } from "./PixelArray.js";
 import * as PixelUtils from "./PixelUtils.js";
 
+//switch
 export class HSVMod{
     /**
      * 
@@ -68,10 +69,12 @@ export function rgb_to_hsv(color) {
 }
 
 /**
- * hsv should be [0, 360), [0, 100) and 
+ * Hsv should be [0, 360), [0, 100) and 
+ * 
+ * returns an Array of RGB values
  * 
  * @param {Array<int>} hsv 
- * @returns 
+ * @returns {<Array<Number>}
  */
 export function hsv_to_rgb(hsv){
     //0 <= h, s, v <= 1 needs to be
@@ -121,9 +124,10 @@ export function hsv2rgb(hsv) {
 /**
  * 
  * @param {Array<int>} rgb 
- * @param {*} hueMod 
- * @param {*} saturateMod 
- * @param {*} valueMod 
+ * @param {Number} hueMod 
+ * @param {Number} saturateMod 
+ * @param {Number} valueMod 
+ * @returns {Array<Number>} an array of new RGB values
  */
 export function HSVModSinglePixel(rgb, hueMod, saturateMod, valueMod){
     let hsv = rgb_to_hsv(rgb);

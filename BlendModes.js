@@ -149,14 +149,14 @@ export function Screen(color1, color2) {
  * @returns {Array<Int>}
  */
 export function Multiply(color1, color2) {
-  var p1 = getParamColor(color1);
-  var p2 = getParamColor(color2);
+  const p1 = getParamColor(color1);
+  const p2 = getParamColor(color2);
 
-  var r = p1[0] * p2[0];
-  var g = p1[1] * p2[1];
-  var b = p1[2] * p2[2];
+  const r = p1[0] * p2[0];
+  const g = p1[1] * p2[1];
+  const b = p1[2] * p2[2];
 
-  var color32 = get32Color([r, g, b, 1]);
+  const color32 = get32Color([r, g, b, 1]);
   if (color2[3] >= 254) {
     return color32;
   } else {

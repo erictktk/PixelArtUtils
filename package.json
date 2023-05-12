@@ -1,6 +1,6 @@
 {
   "name": "eric-pixelarrayutils",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "description": "utils for images",
   "main": "null",
   "directories": {
@@ -12,6 +12,10 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/erictktk/PixelArtUtils.git"
+  },
+  "exports": {
+    "./BlendModes": "./BlendModes.js",
+    "./Composition": "./Composition.js"
   },
   "keywords": [
     "pixel",

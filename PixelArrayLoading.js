@@ -75,7 +75,7 @@ export function ImgToPixelArray(img, imageData=null, elementName=null){
       /** @type {HTMLCanvasElement} */
       var canvas = document.createElement('canvas');
       var context = canvas.getContext('2d');
-      document.body.append(canvas);
+      //document.body.append(canvas);
       if (elementName){
         document.getElementById(elementName).append(canvas);
       }
@@ -84,7 +84,7 @@ export function ImgToPixelArray(img, imageData=null, elementName=null){
       context.drawImage(img, 0, 0 );
       const imgData = context.getImageData(0, 0, img.width, img.height);
       const pixelArray = new PixelArray(imgData.data, img.width);
-      canvas.remove();
+      //canvas.remove();
       return pixelArray;
   }
   catch (err){
