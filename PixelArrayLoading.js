@@ -23,11 +23,11 @@ export function loadImage(url){
  * @param {HTMLElement} element 
  * @returns {PixelArray}
  */
-export async function AsyncUrlToPixelArray(url){
+export async function AsyncUrlToPixelArray(url, setAnonymous=false){
   try{
     let image = await loadImage(url);
     console.log(image.width);
-    return ImgToPixelArray(image);
+    return ImgToPixelArray(image, null, null, setAnonymous);
   }
   catch(err){
     console.log("couldn't load image async!");
@@ -70,11 +70,16 @@ export async function AsyncUrlToPixelArrayCallback(url, callback=null, returnFro
  * @param {String} elementName 
  * @returns {PixelArray}
  */ 
-export function ImgToPixelArray(img, imageData=null, elementName=null){
+export function ImgToPixelArray(img, imageData=null, elementName=null, setAnonymous=false){
   try {
       /** @type {HTMLCanvasElement} */
-      var canvas = document.createElement('canvas');
-      var context = canvas.getContext('2d');
+      let canvas = document.createElement('canvas');
+      let context = canvas.getContext('2d');
+
+      if (setAnonymous){
+        img.crossOrigin = `Anonymous`;
+      }
+
       //document.body.append(canvas);
       if (elementName){
         document.getElementById(elementName).append(canvas);

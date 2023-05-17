@@ -1,5 +1,5 @@
 /**
- * a class that acts as a wrapper for a Uint8ClampedArray that represents an RGBA image
+ * A class that acts as a wrapper for a Uint8ClampedArray that represents an RGBA image.
  */
 
 class PixelArray {
