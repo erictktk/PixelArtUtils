@@ -14,6 +14,7 @@
     "url": "git+https://github.com/erictktk/PixelArtUtils.git"
   },
   "exports": {
+    "./": "./",
     "./BlendModes": "./BlendModes.js",
     "./Composition": "./Composition.js"
   },
