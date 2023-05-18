@@ -5,9 +5,12 @@ import { PixelArray } from "./PixelArray.js";
  * @param {String} url 
  * @returns {Promise}
  */
-export function loadImage(url){
+export function loadImage(url, setAnonymous=false){
   return new Promise( (resolve, reject) =>{
     const image = new Image();
+    if (setAnonymous){
+      image.crossOrigin = 'anonymous';
+    }
     
     image.onload = () => resolve(image);
     image.onerror = () => reject(new Error("Couldn't load image!"));
@@ -25,9 +28,9 @@ export function loadImage(url){
  */
 export async function AsyncUrlToPixelArray(url, setAnonymous=false){
   try{
-    let image = await loadImage(url);
+    let image = await loadImage(url, setAnonymous);
     console.log(image.width);
-    return ImgToPixelArray(image, null, null, setAnonymous);
+    return ImgToPixelArray(image, null, null);
   }
   catch(err){
     console.log("couldn't load image async!");
@@ -70,15 +73,11 @@ export async function AsyncUrlToPixelArrayCallback(url, callback=null, returnFro
  * @param {String} elementName 
  * @returns {PixelArray}
  */ 
-export function ImgToPixelArray(img, imageData=null, elementName=null, setAnonymous=false){
+export function ImgToPixelArray(img, imageData=null, elementName=null){
   try {
       /** @type {HTMLCanvasElement} */
       let canvas = document.createElement('canvas');
       let context = canvas.getContext('2d');
-
-      if (setAnonymous){
-        img.crossOrigin = `Anonymous`;
-      }
 
       //document.body.append(canvas);
       if (elementName){
