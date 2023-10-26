@@ -145,6 +145,19 @@ class PixelArray {
   }
 
   /**
+   * Fills the pixel array with a specific color if passes alphaMin 
+   */
+  fillColorValue(color, alphaMin=200){
+    for(let i = 0; i < this.width; i += 1){
+      for(let j = 0; j < this.height; j += 1){
+        if (this.getColorValue(i, j)[3] > alphaMin){
+          this.setColorValue(i, j, color);
+        }
+      }
+    }
+  }
+
+  /**
    * @returns Array<int>
    */
   getColorValue(x, y) {
@@ -158,12 +171,9 @@ class PixelArray {
   }
 
   /** Gets first found color from pixelArray
-   * 
-   * @param {PixelArray} pixelArray 
-   * @returns {Array<Int>} color
+   * @returns {Array<Int>|null}
    */
   getFirstFoundColor(){
-    //
     for(let i = 0; i < this.width; i += 1){
         for(let j = 0; j < this.height; j += 1){
             //
