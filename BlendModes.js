@@ -164,3 +164,187 @@ export function Multiply(color1, color2) {
     return Over(color1, color32);
   }
 }
+
+/** Difference blend mode 
+ * 
+ * @param {Array<Int>} color1 
+ * @param {Array<Int>} color2 
+ * @returns {Array<Int>}
+ */
+export function Difference(color1, color2) {
+  const p1 = getParamColor(color1);
+  const p2 = getParamColor(color2);
+
+  const r = Math.abs(p1[0] - p2[0]);
+  const g = Math.abs(p1[1] - p2[1]);
+  const b = Math.abs(p1[2] - p2[2]);
+
+  const color32 = get32Color([r, g, b, 1]);
+  if (color2[3] >= 254) {
+    return color32;
+  } else {
+    color32[3] = color2[3];
+    return Over(color1, color32);
+  }
+}
+
+/** Darken blend mode
+ * 
+ * @param {Array<Int>} color1 
+ * @param {Array<Int>} color2 
+ * @returns {Array<Int>}
+ */
+export function Darken(color1, color2) {
+  const p1 = getParamColor(color1);
+  const p2 = getParamColor(color2);
+
+  const r = Math.min(p1[0], p2[0]);
+  const g = Math.min(p1[1], p2[1]);
+  const b = Math.min(p1[2], p2[2]);
+
+  const color32 = get32Color([r, g, b, 1]);
+  if (color2[3] >= 254) {
+    return color32;
+  } else {
+    color32[3] = color2[3];
+    return Over(color1, color32);
+  }
+}
+
+/** Lighten blend mode
+ * 
+ * @param {Array<Int>} color1 
+ * @param {Array<Int>} color2 
+ * @returns {Array<Int>}
+ */
+export function Lighten(color1, color2) {
+  const p1 = getParamColor(color1);
+  const p2 = getParamColor(color2);
+
+  const r = Math.max(p1[0], p2[0]);
+  const g = Math.max(p1[1], p2[1]);
+  const b = Math.max(p1[2], p2[2]);
+
+  const color32 = get32Color([r, g, b, 1]);
+  if (color2[3] >= 254) {
+    return color32;
+  } else {
+    color32[3] = color2[3];
+    return Over(color1, color32);
+  }
+}
+
+/** SoftLight blend mode 
+ * 
+ * @param {Array<Int>} color1 
+ * @param {Array<Int>} color2 
+ * @returns {Array<Int>}
+ */
+export function SoftLight(color1, color2) {
+  const p1 = getParamColor(color1);
+  const p2 = getParamColor(color2);
+
+  const r = (1 - 2 * p2[0]) * p1[0] * p1[0] + 2 * p2[0] * p1[0];
+  const g = (1 - 2 * p2[1]) * p1[1] * p1[1] + 2 * p2[1] * p1[1];
+  const b = (1 - 2 * p2[2]) * p1[2] * p1[2] + 2 * p2[2] * p1[2];
+
+  const color32 = get32Color([r, g, b, 1]);
+  if (color2[3] >= 254) {
+    return color32;
+  } else {
+    color32[3] = color2[3];
+    return Over(color1, color32);
+  }
+}
+
+/** Hard Light blend mode 
+ * 
+ * @param {Array<Int>} color1 
+ * @param {Array<Int>} color2 
+ * @returns {Array<Int>}
+ */
+export function HardLight(color1, color2) {
+  const p1 = getParamColor(color1);
+  const p2 = getParamColor(color2);
+
+  const r = (p2[0] < 0.5) ? (2 * p1[0] * p2[0]) : (1 - 2 * (1 - p1[0]) * (1 - p2[0]));
+  const g = (p2[1] < 0.5) ? (2 * p1[1] * p2[1]) : (1 - 2 * (1 - p1[1]) * (1 - p2[1]));
+  const b = (p2[2] < 0.5) ? (2 * p1[2] * p2[2]) : (1 - 2 * (1 - p1[2]) * (1 - p2[2]));
+
+  const color32 = get32Color([r, g, b, 1]);
+  if (color2[3] >= 254) {
+    return color32;
+  } else {
+    color32[3] = color2[3];
+    return Over(color1, color32);
+  }
+}
+
+/** Color Dodge blend mode 
+ * 
+ * @param {Array<Int>} color1 
+ * @param {Array<Int>} color2 
+ * @returns {Array<Int>}
+ */
+export function ColorDodge(color1, color2) {
+  const p1 = getParamColor(color1);
+  const p2 = getParamColor(color2);
+
+  const r = (p2[0] === 1) ? 1 : Math.min(1, p1[0] / (1 - p2[0]));
+  const g = (p2[1] === 1) ? 1 : Math.min(1, p1[1] / (1 - p2[1]));
+  const b = (p2[2] === 1) ? 1 : Math.min(1, p1[2] / (1 - p2[2]));
+
+  const color32 = get32Color([r, g, b, 1]);
+  if (color2[3] >= 254) {
+    return color32;
+  } else {
+    color32[3] = color2[3];
+    return Over(color1, color32);
+  }
+}
+
+/** Color Burn blend mode 
+ * 
+ * @param {Array<Int>} color1 
+ * @param {Array<Int>} color2 
+ * @returns {Array<Int>}
+ */
+export function ColorBurn(color1, color2) {
+  const p1 = getParamColor(color1);
+  const p2 = getParamColor(color2);
+
+  const r = (p2[0] === 0) ? 0 : 1 - Math.min(1, (1 - p1[0]) / p2[0]);
+  const g = (p2[1] === 0) ? 0 : 1 - Math.min(1, (1 - p1[1]) / p2[1]);
+  const b = (p2[2] === 0) ? 0 : 1 - Math.min(1, (1 - p1[2]) / p2[2]);
+
+  const color32 = get32Color([r, g, b, 1]);
+  if (color2[3] >= 254) {
+    return color32;
+  } else {
+    color32[3] = color2[3];
+    return Over(color1, color32);
+  }
+}
+
+/** Pin Light blend mode 
+ * 
+ * @param {Array<Int>} color1 
+ * @param {Array<Int>} color2 
+ * @returns {Array<Int>}
+ */
+export function PinLight(color1, color2) {
+  const p1 = getParamColor(color1);
+  const p2 = getParamColor(color2);
+
+  const r = (p2[0] < 0.5) ? Math.min(p1[0], 2 * p2[0]) : Math.max(p1[0], 2 * p2[0] - 1);
+  const g = (p2[1] < 0.5) ? Math.min(p1[1], 2 * p2[1]) : Math.max(p1[1], 2 * p2[1] - 1);
+  const b = (p2[2] < 0.5) ? Math.min(p1[2], 2 * p2[2]) : Math.max(p1[2], 2 * p2[2] - 1);
+
+  const color32 = get32Color([r, g, b, 1]);
+  if (color2[3] >= 254) {
+    return color32;
+  } else {
+    color32[3] = color2[3];
+    return Over(color1, color32);
+  }
+}
