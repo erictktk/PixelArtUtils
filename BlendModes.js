@@ -84,9 +84,10 @@ export function OverCustomAlphaExport(customAlphaMultiplier) {
  * 
  * @param {Array<Int>} color1 
  * @param {Array<Int>} color2 
+ * @param {Number|null} customAlpha blend from 0 to 1 if not null
  * @returns {Array<Int>}
  */
-export function Overlay(color1, color2) {
+export function Overlay(color1, color2, customAlpha=null) {
   var p1 = getParamColor(color1);
   var p2 = getParamColor(color2);
 
@@ -113,7 +114,12 @@ export function Overlay(color1, color2) {
   } else {
     //alpha blending
     color32[3] = color2[3];
-    return Over(color1, color32);
+    if (customAlpha !== null)
+      return OverCustomAlpha(color1, color32, customAlpha);
+    }
+    else{
+      return Over(color1, color32);
+    }
   }
 }
 
