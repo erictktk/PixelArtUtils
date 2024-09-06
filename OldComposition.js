@@ -1,5 +1,5 @@
 import { getColorValue, setColorValue } from "./PixelUtils.js";
-import * as Utils from "./Utils.js";
+//import * as Utils from "./Utils.js";
 import * as BlendModes from "./BlendModes.js";
 import { PixelArray } from "./PixelArray.js";
 
