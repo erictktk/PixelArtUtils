@@ -114,7 +114,7 @@ export function Overlay(color1, color2, customAlpha=null) {
   } else {
     //alpha blending
     color32[3] = color2[3];
-    if (customAlpha !== null)
+    if (customAlpha !== null){
       return OverCustomAlpha(color1, color32, customAlpha);
     }
     else{
