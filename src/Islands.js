@@ -7,7 +7,7 @@ import { PixelArray } from "./PixelArray.js";
 export function GetDuplicateIslands(listPixelArrays){
     const sizes = [];
     const sets = [];
-
+    s
     const firstPixelArray = listPixelArrays[0];
 
     sizes.push( {width: firstPixelArray.width, height: firstPixelArray.height});

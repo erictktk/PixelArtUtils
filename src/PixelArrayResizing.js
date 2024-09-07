@@ -30,5 +30,5 @@ export function EnlargeCanvasEmpty(pixelArray, left, right, bottom, top){
         }
     }
 
-    return newPixelArray;
+    return newPixelArrays;
 }
