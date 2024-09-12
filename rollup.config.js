@@ -1,37 +1,47 @@
-import { defineConfig } from 'rollup';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import babel from '@rollup/plugin-babel';
+//import { terser } from 'rollup-plugin-terser'; // Optional minification
+import fs from 'fs';
 import path from 'path';
-import glob from 'glob';
 
-// Get all JavaScript files in the src directory
-const inputFiles = glob.sync('src/**/*.js').reduce((acc, file) => {
-  // Create an object where each file path is mapped to its entry point
-  const entryName = path.basename(file, path.extname(file));
-  acc[entryName] = file;
-  return acc;
-}, {});
+// Read the package.json file
+const packageJson = JSON.parse(fs.readFileSync('./package.json', 'utf-8'));
 
-const createConfig = (format, suffix) => ({
-  input: 'src/index.js', // Use 'index.js' as the main entry point
-  output: [
-    {
-      dir: path.resolve('dist', suffix),
-      format,
-      sourcemap: true,
-      entryFileNames: '[name].js', // Use the filename as the entry point
-    }
-  ],
-  plugins: [
-    resolve(),
-    commonjs(),
-    babel({ babelHelpers: 'bundled', exclude: 'node_modules/**' })
-  ],
-  external: ['path'] // List any external dependencies that should not be bundled
+// Extract exports from package.json
+const exportsField = packageJson.exports || {};
+
+const config = [];
+
+// Loop through the exports and create a Rollup config for each entry
+Object.entries(exportsField).forEach(([exportName, exportPaths]) => {
+  // Ensure there are both "import" and "require" paths
+  if (exportPaths.import && exportPaths.require) {
+    const importPath = path.resolve(exportPaths.import.replace('./dist/esm/', './src/').replace('.js', '.js'));
+    const requirePath = path.resolve(exportPaths.require.replace('./dist/cjs/', './src/').replace('.js', '.js'));
+
+    // Add separate builds for CommonJS and ES Modules
+    config.push({
+      input: importPath,
+      output: [
+        {
+          file: exportPaths.require, // CommonJS output
+          format: 'cjs',
+          exports: 'named',
+        },
+        {
+          file: exportPaths.import, // ES Module output
+          format: 'esm',
+        }
+      ],
+      plugins: [
+        resolve(),
+        commonjs(),
+        babel({ babelHelpers: 'bundled' }),
+        //terser() // Optional for minifying the output
+      ]
+    });
+  }
 });
 
-export default defineConfig([
-  createConfig('cjs', 'cjs'),
-  createConfig('esm', 'esm')
-]);
+export default config;

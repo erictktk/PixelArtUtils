@@ -1701,4 +1701,3 @@ exports.OldComposition = OldComposition;
 exports.PixelArray = PixelArray$1;
 exports.PixelArrayLoading = PixelArrayLoading;
 exports.PixelArrayResizing = PixelArrayResizing;
-//# sourceMappingURL=index.js.map

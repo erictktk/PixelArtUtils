@@ -1689,4 +1689,3 @@ var Islands = /*#__PURE__*/Object.freeze({
 });
 
 export { BlendModes as Blendmodes, Composition, HSVClasses, HSVUtils, Islands, OldComposition, PixelArray$1 as PixelArray, PixelArrayLoading, PixelArrayResizing };
-//# sourceMappingURL=index.js.map
