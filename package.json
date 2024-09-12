@@ -16,6 +16,38 @@
     "./Composition": {
       "import": "./dist/esm/Composition.js",
       "require": "./dist/cjs/Composition.js"
+    },
+"./HSVUtils": {
+      "import": "./dist/esm/HSVUtils.js",
+      "require": "./dist/cjs/HSVUtils.js"
+    },
+    "./OldComposition": {
+      "import": "./dist/esm/OldComposition.js",
+      "require": "./dist/cjs/OldComposition.js"
+    },
+    "./PixelArray": {
+      "import": "./dist/esm/PixelArray.js",
+      "require": "./dist/cjs/PixelArray.js"
+    },
+    "./PixelArrayLoading": {
+      "import": "./dist/esm/PixelArrayLoading.js",
+      "require": "./dist/cjs/PixelArrayLoading.js"
+    },
+    "./PixelArrayResizing": {
+      "import": "./dist/esm/PixelArrayResizing.js",
+      "require": "./dist/cjs/PixelArrayResizing.js"
+    },
+    "./PixelUtils": {
+      "import": "./dist/esm/PixelUtils.js",
+      "require": "./dist/cjs/PixelUtils.js"
+    },
+    "./SimpleComposition": {
+      "import": "./dist/esm/SimpleComposition.js",
+      "require": "./dist/cjs/SimpleComposition.js"
+    },
+    "./vector": {
+      "import": "./dist/esm/vector.js",
+      "require": "./dist/cjs/vector.js"
     }
   },
   "directories": {
