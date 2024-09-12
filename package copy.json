@@ -1,5 +1,5 @@
 {
-  "name": "ericpixelarrayutils",
+  "name": "eric-pixelarrayutils",
   "version": "0.9.3",
   "description": "utils for images",
   "main": "./dist/cjs/index.js",
